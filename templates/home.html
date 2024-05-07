@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <title>Beranda</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu {
+            z-index: 1;
+            height: 72px;
+            width: 100%;
+            padding-inline-start: 100px;
+            padding-inline-end: 100px;
+            background-color: #189AD6;
+            font-size: 18px;
+            justify-content: space-between;
+            position: fixed;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        label {
+            margin: 10px;
+            padding: 5px;
+            float: left;
+        }
+
+        label img {
+            width: 210px;
+        }
+
+        .menu ul {
+            margin: 0;
+            padding: 5px;
+            background: none;
+            display: block;
+            float: right;
+        }
+
+        .menu ul li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        .menu ul li a {
+            display: block;
+            text-decoration: none;
+            padding: 20px;
+            color: white;
+        }
+
+        .menu ul li a:hover {
+            display: block;
+            color: #d1f0ff;
+            background: #045F8B;
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 5px #058BCC;
+        }
+
+        .menu ul li .dropdown {
+            display: none;
+        }
+
+        .menu ul li:hover .dropdown {
+            display: grid;
+            background: #189AD6;
+            position: absolute;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .container {
+            width: 100%;
+            margin-inline: auto;
+            margin-top: 30px;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .container h2 {
+            text-align: center;
+            font-size: 35px;
+            color: #045F8B;
+            font-weight: bold;
+            margin-bottom: 60px;
+        }
+
+        .box {
+            max-width: 70%;
+            text-align: start;
+            border-style: solid;
+            border-color: #045F8B;
+            border-width: 3px;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            /* Distribute content evenly */
+        }
+
+        .contentbox1 {
+
+            flex: 1;
+            /* Take equal space */
+            margin: 10px;
+            /* Add margin for spacing */
+        }
+
+        .contentbox2 {
+            margin: 10px;
+            /* Add margin for spacing */
+        }
+
+        .contentbox3 {
+            margin: 10px;
+            /* Add margin for spacing */
+        }
+
+        .contentbox1 p,
+        .contentbox2 p,
+        .contentbox3 p {
+            margin: 0;
+            /* Remove default margin */
+            font-size: 20px;
+            color: #045F8B;
+
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            /* Arrange buttons vertically */
+            align-items: center;
+            /* Center buttons horizontally */
+            margin-top: 20px;
+            /* Add space between content and buttons */
+            flex: 1 1 50%;
+        }
+
+        .button {
+            background: none;
+            border: 2px solid #045F8B;
+            border-radius: 10px;
+            color: #045F8B;
+            padding: 15px 32px;
+            text-align: center;
+            display: flex;
+            font-size: 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: color 0.4s linear;
+            position: relative;
+        }
+
+        .button:hover {
+            color: #fff;
+            background: #045F8B;
+        }
+
+        .button::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #045F8B;
+            z-index: -1;
+            transition: transform 0.5s;
+            transform-origin: 0 0;
+            transform: scaleX(0);
+            transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+        }
+
+        .button:hover::before {
+            transform: scaleX(1);
+        }
+
+        footer {
+            color: #fff;
+            background-color: #189AD6;
+            margin-top: 80px;
+        }
+
+        footer p {
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="menu">
+        <label><img src="{{ url_for('static', filename='img/white.png')}}" alt="RoadCrack"><a
+                href="#beranda"></a></label>
+        <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#">Klasifikasi</a>
+                <ul class="dropdown">
+                    <li><a href="{{ url_for('tunggal') }}">Klasifikasi Tunggal</a>
+                    <li><a href="{{ url_for('multi') }}">Multi Klasifikasi</a>
+                </ul>
+            </li>
+            <li><a href="#footer">Tentang</a></li>
+        </ul>
+    </nav>
+
+    <div id="beranda" class="container">
+        <h2>Spesifikasi Sistem</h2>
+        <div class="box">
+            <div class="contentbox1">
+                <p>Platform</p>
+                <p>CPU</p>
+                <p>Cores</p>
+                <p>RAM</p>
+                <p>GPU</p>
+                <p>GPU RAM</p>
+            </div>
+            <div class="contentbox2">
+                <p>:</p>
+                <p>:</p>
+                <p>:</p>
+                <p>:</p>
+                <p>:</p>
+                <p>:</p>
+            </div>
+            <div class="contentbox3">
+                <p>{{ specs.Platform }}</p>
+                <p>{{ specs.CPU }}</p>
+                <p>{{ specs.Cores }}</p>
+                <p>{{ specs.RAM }}</p>
+                <p>
+                    {% if specs.GPUs != "N/A" %}
+                        {% for gpu in specs.GPUs %}
+                            {{ gpu.Name }}<br>
+                        {% endfor %}
+                    {% else %}
+                        {{ specs.GPUs }}
+                    {% endif %}
+                </p>
+                <p>
+                    {% if specs.GPUs != "N/A" %}
+                        {% for gpu in specs.GPUs %}
+                            {{ gpu['GPU RAM'] }} MB<br>
+                        {% endfor %}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="button" onclick="window.location='{{ url_for('tunggal') }}'">Klasifikasi Tunggal</button>
+            <button class="button" onclick="window.location='{{ url_for('multi') }}'">Multi Klasifikasi</button>
+        </div>
+    </div>
+
+
+    <footer id="footer">
+        <p>EVALUASI HASIL OUTPUT PENGUJIAN PERFORMA MODEL DETEKSI OBJEK RESIDUAL NEURAL NETWORK (RESNET-50) DAN YOLO V8
+            DALAM KLASIFIKASI KERETAKAN JALAN MENGGUNAKAN METRIK MAP</p>
+    </footer>
+</body>
+
+</html>

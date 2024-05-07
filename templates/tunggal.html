@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <title>Beranda</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu {
+            z-index: 1;
+            height: 72px;
+            width: 100%;
+            padding-inline-start: 100px;
+            padding-inline-end: 100px;
+            background-color: #189AD6;
+            font-size: 18px;
+            justify-content: space-between;
+            position: fixed;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        label {
+            margin: 10px;
+            padding: 5px;
+            float: left;
+        }
+
+        label img {
+            width: 210px;
+        }
+
+        .menu ul {
+            margin: 0;
+            padding: 5px;
+            background: none;
+            display: block;
+            float: right;
+        }
+
+        .menu ul li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        .menu ul li a {
+            display: block;
+            text-decoration: none;
+            padding: 20px;
+            color: white;
+        }
+
+        .menu ul li a:hover {
+            display: block;
+            color: #d1f0ff;
+            background: #045F8B;
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 5px #058BCC;
+        }
+
+        .menu ul li .dropdown {
+            display: none;
+        }
+
+        .menu ul li:hover .dropdown {
+            display: grid;
+            background: #189AD6;
+            position: absolute;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .title {
+            width: 100%;
+            margin-top: 6%;
+        }
+
+        .title h2 {
+            text-align: center;
+            font-size: 35px;
+            color: #045F8B;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            margin: 20px;
+            margin-top: 0;
+            padding: 20px;
+            padding-top: 0;
+        }
+
+        .content .main1,
+        .content .main2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+            flex: 2;
+        }
+
+        .content .main1 img,
+        .content .main2 img {
+            margin: 0;
+            width: 80%;
+            min-width: 250px;
+            border: 2px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .content .main1 .box,
+        .content .main2 .box {
+            display: flex;
+            width: 80%;
+            margin-top: 5px;
+        }
+
+        .content .main1 .model,
+        .content .main2 .model {
+            margin: 5px;
+        }
+
+        .content .main1 .model h2,
+        .content .main2 .model h2 {
+            margin: 0;
+            margin-top: 10px;
+            color: #045F8B;
+        }
+
+        .contentbox1 {
+
+            flex: 1;
+            /* Take equal space */
+            margin: 5px;
+            /* Add margin for spacing */
+        }
+
+        .contentbox2 {
+            margin: 5px;
+            /* Add margin for spacing */
+        }
+
+        .contentbox3 {
+            flex: 2;
+            margin: 5px;
+            /* Add margin for spacing */
+        }
+
+        .contentbox1 p,
+        .contentbox2 p,
+        .contentbox3 p {
+            margin: 0;
+            /* Remove default margin */
+            font-size: 20px;
+            color: #045F8B;
+        }
+
+
+        .content .btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 80px;
+            flex: 1;
+        }
+
+        .content .btn .button {
+            width: 100%;
+            background: none;
+            color: #045F8B;
+            padding: 10px 20px;
+            border: 2px solid #045F8B;
+            font-size: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: color 0.4s linear;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content .btn .button:hover {
+            color: #fff;
+            background: #045F8B;
+        }
+
+        .content .btn .button::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #045F8B;
+            z-index: -1;
+            transition: transform 0.5s;
+            transform-origin: 0 0;
+            transform: scaleX(0);
+            transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+        }
+
+        .content .btn .button:hover::before {
+            transform: scaleX(1);
+        }
+
+        footer {
+            color: #fff;
+            background-color: #189AD6;
+            margin-top: 100px;
+
+        }
+
+        footer p {
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="menu">
+        <label><img src="{{ url_for('static', filename='img/white.png')}}" alt="RoadCrack"></label>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Beranda</a></li>
+            <li><a href="#">Klasifikasi</a>
+                <ul class="dropdown">
+                    <li><a href="{{ url_for('tunggal') }}">Klasifikasi Tunggal</a>
+                    <li><a href="{{ url_for('multi') }}">Multi Klasifikasi</a>
+                </ul>
+            </li>
+            <li><a href="#footer">Tentang</a></li>
+        </ul>
+    </nav>
+
+    <div class="title">
+        <h2>Klasifikasi Tunggal</h2>
+    </div>
+
+    <div class="content">
+        <div class="main1">
+            <img id="uploadedImageResnet" src="{{ url_for('static', filename='img/bledding.jpg')}}" alt="">
+
+            <div class="model">
+                <h2>ResNet-50</h2>
+            </div>
+            <div class="box">
+                <div class="contentbox3" id="resnet-contentbox3">
+                    {% if classification_results %}
+                    {% for result in classification_results %}
+                    <p>Image Path: {{ result.image_path }}</p>
+                    <p>Predicted Class: {{ result.predicted_class }}</p>
+                    <p>Confidence: {{ result.confidence }}</p>
+                    <p>Inference Time: {{ result.inference_time }} ms</p>
+                    {% endfor %}
+                    {% else %}
+                    <p style="text-align: center;">No classification results available.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="btn">
+            <input type="file" id="uploadInput" style="display: none;" onchange="uploadImage()">
+            <button class="button" onclick="document.getElementById('uploadInput').click()">Upload</button>
+            <button id="mulai-klasifikasi" class="button">Mulai Klasifikasi</button>
+        </div>
+
+        <div class="main2">
+            {# add a way to add file using flask #}
+            <img id="uploadedImageYOLO" src="{{ url_for('static', filename='img/bledding.jpg')}}" alt="">
+            <div class="model">
+                <h2>YOLO v8</h2>
+            </div>
+            <div class="box">
+                <div class="contentbox3" id="yolov8-contentbox3">
+                    <div class="contentbox3">
+                        {% if classification_results %}
+                        {% for result in classification_results %}
+                        <p>Image Path: {{ result.image_path }}</p>
+                        <p>Predicted Class: {{ result.predicted_class }}</p>
+                        <p>Preprocess Speed: {{ result.preprocess_speed_ms }} ms</p>
+                        <p>Inference Speed: {{ result.inference_speed_ms }} ms</p>
+                        <p>Postprocess Speed: {{ result.postprocess_speed_ms }} ms</p>
+                        {% endfor %}
+                        {% else %}
+                        <p style="text-align: center;">No classification results available.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <p>EVALUASI HASIL OUTPUT PENGUJIAN PERFORMA MODEL DETEKSI OBJEK RESIDUAL NEURAL NETWORK (RESNET-50) DAN YOLO V8
+            DALAM KLASIFIKASI KERETAKAN JALAN MENGGUNAKAN METRIK MAP</p>
+    </footer>
+</body>
+
+<script>
+    // JavaScript code to handle file upload
+    document.getElementById('uploadInput').addEventListener('change', function (event) {
+        var file = event.target.files[0];
+
+        // Check if the uploaded file is an image
+        if (!file.type.startsWith('image/')) {
+            alert('Only image files are allowed.');
+            return; // Exit the function
+        }
+
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var imageSrc = e.target.result;
+            document.getElementById('uploadedImageYOLO').src = imageSrc;
+            document.getElementById('uploadedImageResnet').src = imageSrc;
+        };
+        reader.readAsDataURL(file);
+    });
+
+
+    // JavaScript code to handle classification
+    document.getElementById('mulai-klasifikasi').addEventListener('click', function () {
+        // Create a FormData object and append the uploaded file to it
+        var formData = new FormData();
+        var file = document.getElementById('uploadInput').files[0];
+        if (!file) {
+            alert('Please select a file before starting the classification process.');
+            return;
+        }
+        // Check if the file is an image
+        if (!file.type.startsWith('image/')) {
+            alert('Only image file is allowed.');
+            return;
+        }
+
+        formData.append('file', file);
+
+        // Send a request to the server to perform YOLO model classification
+        var xhrYolo = new XMLHttpRequest();
+        xhrYolo.open('POST', '/classify_yolo', true);
+        xhrYolo.onreadystatechange = function () {
+            if (xhrYolo.readyState == 4 && xhrYolo.status == 200) {
+                // Parse the response JSON and update the UI
+                var classificationResults = JSON.parse(xhrYolo.responseText);
+                // Update the UI with the classification results for YOLO model
+                updateClassificationResultsYolo(classificationResults);
+            }
+        };
+        xhrYolo.send(formData);
+
+        // Send a request to the server to perform ResNet model classification
+        var xhrResNet = new XMLHttpRequest();
+        xhrResNet.open('POST', '/classify_tf', true);
+        xhrResNet.onreadystatechange = function () {
+            if (xhrResNet.readyState == 4 && xhrResNet.status == 200) {
+                // Parse the response JSON and update the UI
+                var classificationResults = JSON.parse(xhrResNet.responseText);
+                // Update the UI with the classification results for ResNet model
+                updateClassificationResultsResNet(classificationResults);
+            }
+        };
+        xhrResNet.send(formData);
+    });
+
+    // Function to update the classification results for YOLO model in the UI
+    function updateClassificationResultsYolo(results) {
+        var contentBox = document.getElementById('yolov8-contentbox3'); // Target the YOLO v8 section
+        contentBox.innerHTML = ''; // Clear previous results
+
+        if (results && results.length > 0) {
+            results.forEach(function (result) {
+                var html = `
+                    <p>Image Path: ${result.image_path}</p>
+                    <p>Predicted Class: ${result.predicted_class}</p>
+                    <p>Actual Class: ${result.actual_class}</p>
+                    <p>Confidence: ${result.confidence}</p>
+                    <p>Accuracy: ${result.accuracy}%</p>
+                    <p>Preprocess Speed: ${result.preprocess_speed_ms} ms</p>
+                    <p>Inference Speed: ${result.inference_speed_ms} ms</p>
+                    <p>Postprocess Speed: ${result.postprocess_speed_ms} ms</p>
+                `;
+                contentBox.insertAdjacentHTML('beforeend', html);
+            });
+        } else {
+            contentBox.innerHTML = '<p style="text-align: center;">No classification results available.</p>';
+        }
+    }
+
+    // Function to update the classification results for ResNet model in the UI
+    function updateClassificationResultsResNet(results) {
+        var contentBox = document.getElementById('resnet-contentbox3'); // Target the ResNet section
+        contentBox.innerHTML = ''; // Clear previous results
+
+        if (results && results.length > 0) {
+            results.forEach(function (result) {
+                var html = `
+                    <p>Image Path: ${result.image_path}</p>
+                    <p>Predicted Class: ${result.predicted_class}</p>
+                    <p>Actual Class: ${result.actual_class}</p>
+                    <p>Confidence: ${result.confidence}</p>
+                    <p>Accuracy: ${result.accuracy}%</p>
+                    <p>Inference Time: ${result.inference_time} ms</p>
+                `;
+                contentBox.insertAdjacentHTML('beforeend', html);
+            });
+        } else {
+            contentBox.innerHTML = '<p style="text-align: center;">No classification results available.</p>';
+        }
+    }
+</script>
+
+</html>
