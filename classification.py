@@ -13,7 +13,7 @@ def classify_image_yolo(image_path):
     model = YOLO("best.pt", task="classify")
     results = model.predict(source=image_path)
 
-    classification_results = []
+    classification_results = {}
 
     for result in results:
         # Read the image
@@ -33,17 +33,19 @@ def classify_image_yolo(image_path):
         confidence = round(confidence, 2)
 
         filename = os.path.basename(image_path)
+        filename_lowercase = filename.lower()
+
         true_class_label = None
-        if "good" in filename:
+        if "good" in filename_lowercase:
             true_class_label = "good"
-        elif "pothole" in filename:
+        elif "pothole" in filename_lowercase:
             true_class_label = "pothole"
-        elif "crack" in filename:
+        elif "crack" in filename_lowercase:
             true_class_label = "crack"
 
         # Check if predicted class matches true class and calculate accuracy
         if predicted_class_label == true_class_label:
-            accuracy = 100
+            accuracy = 1
         else:
             accuracy = 0
 
@@ -66,18 +68,16 @@ def classify_image_yolo(image_path):
         cv2.imwrite(output_image_path, image)
 
         # Store the classification results
-        classification_results.append(
-            {
-                "image_path": output_image_path,
-                "predicted_class": predicted_class_label,
-                "actual_class": true_class_label,
-                "confidence": confidence,
-                "accuracy": accuracy,
-                "preprocess_speed_ms": preprocess_speed_ms,
-                "inference_speed_ms": inference_speed_ms,
-                "postprocess_speed_ms": postprocess_speed_ms,
-            }
-        )
+        classification_results = {
+            "image_path": output_image_path,
+            "predicted_class": predicted_class_label,
+            "actual_class": true_class_label,
+            "confidence": confidence,
+            "accuracy": accuracy,
+            "preprocess_speed_ms": preprocess_speed_ms,
+            "inference_speed_ms": inference_speed_ms,
+            "postprocess_speed_ms": postprocess_speed_ms,
+        }
 
     return classification_results
 
@@ -87,14 +87,12 @@ def classify_image_tf(image_path):
     model_path = "savedModel"  # Replace with the actual model path
     model = hub.KerasLayer(model_path)
 
-    class_names = ["good", "crack", "pothole"]
+    class_names = ["pothole", "good", "crack"]
     img = Image.open(image_path).resize((224, 224))
+    img = img.convert("RGB")  # Ensure the image is converted to RGB
     img = np.array(img)
-    # Convert RGBA to RGB if the image has an alpha channel
-    if img.shape[-1] == 4:
-        img = img[:, :, :3]
-    img = np.expand_dims(img, axis=0)
     img = img / 255.0
+    img = np.expand_dims(img, axis=0)
 
     # Start measuring time before inference
     start_time = time.time()
@@ -106,8 +104,8 @@ def classify_image_tf(image_path):
     # Calculate inference time
     inference_time = round((end_time - start_time) * 1000, 1)  # Convert to milliseconds
 
-    # Initialize an empty list to store classification results
-    classification_results = []
+    # Initialize an empty dictionary to store classification results
+    classification_results = {}
 
     for prediction in predictions:
         predicted_class_index = np.argmax(prediction)
@@ -115,21 +113,23 @@ def classify_image_tf(image_path):
         confidence = float(
             prediction[predicted_class_index] * 100
         )  # Convert to Python float
-        
+
         confidence = round(confidence, 2)
 
         filename = os.path.basename(image_path)
+        filename_lowercase = filename.lower()
+
         true_class_label = None
-        if "good" in filename:
+        if "good" in filename_lowercase:
             true_class_label = "good"
-        elif "pothole" in filename:
+        elif "pothole" in filename_lowercase:
             true_class_label = "pothole"
-        elif "crack" in filename:
+        elif "crack" in filename_lowercase:
             true_class_label = "crack"
 
         # Check if predicted class matches true class and calculate accuracy
         if predicted_class == true_class_label:
-            accuracy = 100
+            accuracy = 1
         else:
             accuracy = 0
 
@@ -149,17 +149,14 @@ def classify_image_tf(image_path):
         image_name = f"predicted_{predicted_class}-" + os.path.basename(image_path)
         output_image_path = os.path.join("static", "result", "resnet", image_name)
         cv2.imwrite(output_image_path, image)
-
-        # Append the classification result to the list
-        classification_results.append(
-            {
-                "image_path": output_image_path,
-                "predicted_class": predicted_class,
-                "actual_class": true_class_label,
-                "confidence": confidence,
-                "accuracy": accuracy,
-                "inference_time": inference_time,
-            }
-        )
+        # Append the classification result to the dictionary
+        classification_results = {
+            "image_path": output_image_path,
+            "predicted_class": predicted_class,
+            "actual_class": true_class_label,
+            "confidence": confidence,
+            "accuracy": accuracy,
+            "inference_time": inference_time,
+        }
 
     return classification_results

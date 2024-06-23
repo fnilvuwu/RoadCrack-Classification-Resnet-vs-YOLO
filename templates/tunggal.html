@@ -295,7 +295,7 @@
             {# add a way to add file using flask #}
             <img id="uploadedImageYOLO" src="{{ url_for('static', filename='img/bledding.jpg')}}" alt="">
             <div class="model">
-                <h2>YOLO v8</h2>
+                <h2>YOLOv8</h2>
             </div>
             <div class="box">
                 <div class="contentbox3" id="yolov8-contentbox3">
@@ -344,17 +344,13 @@
         reader.readAsDataURL(file);
     });
 
-
-    // JavaScript code to handle classification
     document.getElementById('mulai-klasifikasi').addEventListener('click', function () {
-        // Create a FormData object and append the uploaded file to it
         var formData = new FormData();
         var file = document.getElementById('uploadInput').files[0];
         if (!file) {
             alert('Please select a file before starting the classification process.');
             return;
         }
-        // Check if the file is an image
         if (!file.type.startsWith('image/')) {
             alert('Only image file is allowed.');
             return;
@@ -362,74 +358,68 @@
 
         formData.append('file', file);
 
-        // Send a request to the server to perform YOLO model classification
         var xhrYolo = new XMLHttpRequest();
         xhrYolo.open('POST', '/classify_yolo', true);
         xhrYolo.onreadystatechange = function () {
             if (xhrYolo.readyState == 4 && xhrYolo.status == 200) {
-                // Parse the response JSON and update the UI
                 var classificationResults = JSON.parse(xhrYolo.responseText);
-                // Update the UI with the classification results for YOLO model
                 updateClassificationResultsYolo(classificationResults);
             }
         };
         xhrYolo.send(formData);
 
-        // Send a request to the server to perform ResNet model classification
         var xhrResNet = new XMLHttpRequest();
         xhrResNet.open('POST', '/classify_tf', true);
         xhrResNet.onreadystatechange = function () {
             if (xhrResNet.readyState == 4 && xhrResNet.status == 200) {
-                // Parse the response JSON and update the UI
                 var classificationResults = JSON.parse(xhrResNet.responseText);
-                // Update the UI with the classification results for ResNet model
                 updateClassificationResultsResNet(classificationResults);
             }
         };
         xhrResNet.send(formData);
     });
 
-    // Function to update the classification results for YOLO model in the UI
     function updateClassificationResultsYolo(results) {
-        var contentBox = document.getElementById('yolov8-contentbox3'); // Target the YOLO v8 section
-        contentBox.innerHTML = ''; // Clear previous results
+        var contentBox = document.getElementById('yolov8-contentbox3');
+        contentBox.innerHTML = '';
 
-        if (results && results.length > 0) {
-            results.forEach(function (result) {
+        if (results && results.results) {
+            for (var key in results.results) {
+                var result = results.results[key];
                 var html = `
-                    <p>Image Path: ${result.image_path}</p>
-                    <p>Predicted Class: ${result.predicted_class}</p>
-                    <p>Actual Class: ${result.actual_class}</p>
-                    <p>Confidence: ${result.confidence}</p>
-                    <p>Accuracy: ${result.accuracy}%</p>
-                    <p>Preprocess Speed: ${result.preprocess_speed_ms} ms</p>
-                    <p>Inference Speed: ${result.inference_speed_ms} ms</p>
-                    <p>Postprocess Speed: ${result.postprocess_speed_ms} ms</p>
-                `;
+                        <p>Image Path: ${result.image_path}</p>
+                        <p>Predicted Class: ${result.predicted_class}</p>
+                        <p>Actual Class: ${result.actual_class}</p>
+                        <p>Confidence: ${result.confidence}</p>
+                        <p>Accuracy: ${result.accuracy}%</p>
+                        <p>Preprocess Speed: ${result.preprocess_speed_ms} ms</p>
+                        <p>Inference Speed: ${result.inference_speed_ms} ms</p>
+                        <p>Postprocess Speed: ${result.postprocess_speed_ms} ms</p>
+                    `;
                 contentBox.insertAdjacentHTML('beforeend', html);
-            });
+            }
         } else {
             contentBox.innerHTML = '<p style="text-align: center;">No classification results available.</p>';
         }
     }
 
-    // Function to update the classification results for ResNet model in the UI
     function updateClassificationResultsResNet(results) {
-        var contentBox = document.getElementById('resnet-contentbox3'); // Target the ResNet section
-        contentBox.innerHTML = ''; // Clear previous results
+        var contentBox = document.getElementById('resnet-contentbox3');
+        contentBox.innerHTML = '';
 
-        if (results && results.length > 0) {
-            results.forEach(function (result) {
+        if (results && results.results) {
+            for (var key in results.results) {
+                var result = results.results[key];
                 var html = `
-                    <p>Image Path: ${result.image_path}</p>
-                    <p>Predicted Class: ${result.predicted_class}</p>
-                    <p>Actual Class: ${result.actual_class}</p>
-                    <p>Confidence: ${result.confidence}</p>
-                    <p>Accuracy: ${result.accuracy}%</p>
-                    <p>Inference Time: ${result.inference_time} ms</p>
-                `;
+                        <p>Image Path: ${result.image_path}</p>
+                        <p>Predicted Class: ${result.predicted_class}</p>
+                        <p>Actual Class: ${result.actual_class}</p>
+                        <p>Confidence: ${result.confidence}</p>
+                        <p>Accuracy: ${result.accuracy}%</p>
+                        <p>Inference Time: ${result.inference_time} ms</p>
+                    `;
                 contentBox.insertAdjacentHTML('beforeend', html);
-            });
+            }
         } else {
             contentBox.innerHTML = '<p style="text-align: center;">No classification results available.</p>';
         }
