@@ -301,6 +301,9 @@ def multi():
                 error_message = f"Filename '{file.filename}' does not contain 'pothole', 'good', or 'crack'. Prediction won't be running."
                 return jsonify({"error": error_message})
 
+        # Ensure the directory exists
+        ensure_directory("temp/img")
+
         # Loop over the files for YOLO
         for file in files:
             image_path = os.path.join("temp/img/", file.filename)
@@ -395,5 +398,15 @@ def get_image_yolo(image_filename):
     return send_from_directory("static/result/yolo", image_filename)
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    print("🚀 Starting RoadCrack AI...")
+
+    port = int(os.environ.get("PORT", 8000))
+
+    print(f"🌐 Server running on 0.0.0.0:{port}")
+
+    app.run(host="0.0.0.0", port=port)

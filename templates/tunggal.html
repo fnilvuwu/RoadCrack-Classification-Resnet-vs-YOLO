@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-    <title>Beranda</title>
+    <title>RoadCrack Classification</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.png')}}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -254,7 +255,7 @@
                     <li><a href="{{ url_for('multi') }}">Multi Klasifikasi</a>
                 </ul>
             </li>
-            <li><a href="#footer">Tentang</a></li>
+            <li><a href="{{ url_for('about') }}">Tentang</a></li>
         </ul>
     </nav>
 

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <title>RoadCrack Classification - Tentang</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.png')}}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu {
+            z-index: 1;
+            height: 72px;
+            width: 100%;
+            padding-inline-start: 100px;
+            padding-inline-end: 100px;
+            background-color: #189AD6;
+            font-size: 18px;
+            justify-content: space-between;
+            position: fixed;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        label {
+            margin: 10px;
+            padding: 5px;
+            float: left;
+        }
+
+        label img {
+            width: 210px;
+        }
+
+        .menu ul {
+            margin: 0;
+            padding: 5px;
+            background: none;
+            display: block;
+            float: right;
+        }
+
+        .menu ul li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        .menu ul li a {
+            display: block;
+            text-decoration: none;
+            padding: 20px;
+            color: white;
+        }
+
+        .menu ul li a:hover {
+            display: block;
+            color: #d1f0ff;
+            background: #045F8B;
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 5px #058BCC;
+        }
+
+        .menu ul li .dropdown {
+            display: none;
+        }
+
+        .menu ul li:hover .dropdown {
+            display: grid;
+            background: #189AD6;
+            position: absolute;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .container {
+            width: 100%;
+            margin-inline: auto;
+            margin-top: 100px;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .title {
+            width: 100%;
+        }
+
+        .title h2 {
+            text-align: center;
+            font-size: 35px;
+            color: #045F8B;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            max-width: 800px;
+            text-align: center;
+            background: #f9f9f9;
+            border-style: solid;
+            border-color: #045F8B;
+            border-width: 3px;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .box p {
+            font-size: 20px;
+            color: #045F8B;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .creator-info {
+            font-size: 24px !important;
+            font-weight: bold;
+            margin-top: 30px !important;
+            color: #189AD6 !important;
+        }
+
+        .cta-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed #189AD6;
+        }
+
+        .cta-section h3 {
+            color: #045F8B;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white !important;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white !important;
+        }
+
+        .btn-linkedin {
+            background-color: #0077B5;
+        }
+        .btn-linkedin:hover {
+            background-color: #005E93;
+        }
+
+        .btn-instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        .btn-instagram:hover {
+            background: linear-gradient(45deg, #d88229 0%, #ce5b33 25%, #c4203a 50%, #b51c59 75%, #a61376 100%);
+        }
+
+        .btn-youtube {
+            background-color: #FF0000;
+        }
+        .btn-youtube:hover {
+            background-color: #CC0000;
+        }
+
+        .btn-fiverr {
+            background-color: #1dbf73;
+        }
+        .btn-fiverr:hover {
+            background-color: #169b5c;
+        }
+
+        footer {
+            color: #fff;
+            background-color: #189AD6;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 10px;
+        }
+    </style>
+    <!-- Add FontAwesome for icons (optional but recommended for social buttons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="menu">
+        <label><img src="{{ url_for('static', filename='img/white.png')}}" alt="RoadCrack"><a
+                href="{{ url_for('home') }}"></a></label>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Beranda</a></li>
+            <li><a href="#">Klasifikasi</a>
+                <ul class="dropdown">
+                    <li><a href="{{ url_for('tunggal') }}">Klasifikasi Tunggal</a>
+                    <li><a href="{{ url_for('multi') }}">Multi Klasifikasi</a>
+                </ul>
+            </li>
+            <li><a href="{{ url_for('about') }}">Tentang</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="title">
+            <h2>Tentang Website</h2>
+        </div>
+        <div class="box">
+            <p><strong>Tujuan Website:</strong><br>
+                Website ini bertujuan untuk mengevaluasi hasil pengujian performa model deteksi objek Residual Neural Network (ResNet-50) dan YOLOv8 dalam klasifikasi keretakan jalan menggunakan metrik mAP. Melalui website ini, pengguna dapat membandingkan akurasi dan kecepatan inferensi dari kedua model dalam mendeteksi dan mengklasifikasikan kondisi jalan (Good, Pothole, Crack).
+            </p>
+            <p class="creator-info">Made by Fnilvu & Fatahillah</p>
+            
+            <div class="cta-section">
+                <h3>Want to make a project like this? Hire me!</h3>
+                <p style="font-size: 16px; margin-bottom: 5px;">Connect with me on social media or hire me directly:</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/fnilvuwu/" target="_blank" class="social-btn btn-linkedin">
+                        <i class="fab fa-linkedin" style="margin-right: 8px;"></i> LinkedIn
+                    </a>
+                    <a href="https://www.instagram.com/fnilvuwu/" target="_blank" class="social-btn btn-instagram">
+                        <i class="fab fa-instagram" style="margin-right: 8px;"></i> Instagram
+                    </a>
+                    <a href="https://www.youtube.com/@fnilvuwu" target="_blank" class="social-btn btn-youtube">
+                        <i class="fab fa-youtube" style="margin-right: 8px;"></i> YouTube
+                    </a>
+                    <a href="https://www.fiverr.com/fnilvuwu" target="_blank" class="social-btn btn-fiverr">
+                        <i class="fas fa-handshake" style="margin-right: 8px;"></i> Fiverr
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <p>EVALUASI HASIL OUTPUT PENGUJIAN PERFORMA MODEL DETEKSI OBJEK RESIDUAL NEURAL NETWORK (RESNET-50) DAN YOLO V8
+            DALAM KLASIFIKASI KERETAKAN JALAN MENGGUNAKAN METRIK MAP</p>
+    </footer>
+</body>
+
+</html>
