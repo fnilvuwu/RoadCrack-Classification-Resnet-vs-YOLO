@@ -15,20 +15,20 @@
     <nav class="menu">
         <label><img src="{{ url_for('static', filename='img/white.png')}}" alt="RoadCrack"></label>
         <ul>
-            <li><a href="{{ url_for('home') }}">Beranda</a></li>
-            <li><a href="#">Klasifikasi</a>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="#">Classification</a>
                 <ul class="dropdown">
-                    <li><a href="{{ url_for('tunggal') }}">Klasifikasi Tunggal</a>
-                    <li><a href="{{ url_for('multi') }}">Multi Klasifikasi</a>
+                    <li><a href="{{ url_for('single') }}">Single Classification</a>
+                    <li><a href="{{ url_for('multi') }}">Multiple Classification</a>
                 </ul>
             </li>
-            <li><a href="{{ url_for('about') }}">Tentang</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
         </ul>
     </nav>
 
 
     <div class="title">
-        <h2>Multi Klasifikasi</h2>
+        <h2>Multiple Classification</h2>
     </div>
 
     <div class="content">
@@ -162,18 +162,19 @@
         <div>
             {# the issue here is that the action here is calling it so it'll return plain json #}
             <form id="directoryForm" method="POST" enctype="multipart/form-data">
-                <label for="directoryInput" class="button">Direktori<input type="file" id="directoryInput" name="file"
+                <label for="directoryInput" class="button">Directory<input type="file" id="directoryInput" name="file"
                         multiple style="display: none;"></label>
-                <button type="submit" class="button">Mulai Klasifikasi</button>
+                <button type="submit" class="button">Start Classification</button>
             </form>
             <button id="exportButton" class="button">Export</button>
         </div>
     </div>
 
     <footer id="footer">
-        <p>EVALUASI HASIL OUTPUT PENGUJIAN PERFORMA MODEL DETEKSI OBJEK RESIDUAL NEURAL NETWORK (RESNET-50) DAN
+        <p>EVALUATION OF THE OUTPUT OF PERFORMANCE TESTING OF OBJECT DETECTION MODELS RESIDUAL NEURAL NETWORK
+            (RESNET-50) AND
             YOLO V8
-            DALAM KLASIFIKASI KERETAKAN JALAN MENGGUNAKAN METRIK MAP</p>
+            IN ROAD CRACK CLASSIFICATION USING MAP METRIC</p>
     </footer>
 
 </body>
@@ -203,7 +204,7 @@
         var fileLocation = file_locations[index];
         console.log(fileLocation);
         const displayedImages = document.querySelectorAll('.displayedImage');
-        
+
         // Fetch and display corresponding results from tf_results
         var tfResult = tf_results.results ? tf_results.results['tf_' + index] : null;
         console.log(tfResult)

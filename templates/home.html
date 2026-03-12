@@ -217,19 +217,19 @@
         <label><img src="{{ url_for('static', filename='img/white.png')}}" alt="RoadCrack"><a
                 href="#beranda"></a></label>
         <ul>
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#">Klasifikasi</a>
+            <li><a href="#beranda">Home</a></li>
+            <li><a href="#">Classification</a>
                 <ul class="dropdown">
-                    <li><a href="{{ url_for('tunggal') }}">Klasifikasi Tunggal</a>
-                    <li><a href="{{ url_for('multi') }}">Multi Klasifikasi</a>
+                    <li><a href="{{ url_for('single') }}">Single Classification</a>
+                    <li><a href="{{ url_for('multi') }}">Multiple Classification</a>
                 </ul>
             </li>
-            <li><a href="{{ url_for('about') }}">Tentang</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
         </ul>
     </nav>
 
     <div id="beranda" class="container">
-        <h2>Spesifikasi Sistem</h2>
+        <h2>System Specifications</h2>
         <div class="box">
             <div class="contentbox1">
                 <p>Platform</p>
@@ -254,34 +254,35 @@
                 <p>{{ specs.RAM }}</p>
                 <p>
                     {% if specs.GPUs != "N/A" %}
-                        {% for gpu in specs.GPUs %}
-                            {{ gpu.Name }}<br>
-                        {% endfor %}
+                    {% for gpu in specs.GPUs %}
+                    {{ gpu.Name }}<br>
+                    {% endfor %}
                     {% else %}
-                        {{ specs.GPUs }}
+                    {{ specs.GPUs }}
                     {% endif %}
                 </p>
                 <p>
                     {% if specs.GPUs != "N/A" %}
-                        {% for gpu in specs.GPUs %}
-                            {{ gpu['GPU RAM'] }} MB<br>
-                        {% endfor %}
+                    {% for gpu in specs.GPUs %}
+                    {{ gpu['GPU RAM'] }} MB<br>
+                    {% endfor %}
                     {% else %}
-                        N/A
+                    N/A
                     {% endif %}
                 </p>
             </div>
         </div>
         <div class="button-container">
-            <button class="button" onclick="window.location='{{ url_for('tunggal') }}'">Klasifikasi Tunggal</button>
-            <button class="button" onclick="window.location='{{ url_for('multi') }}'">Multi Klasifikasi</button>
+            <button class="button" onclick="window.location='{{ url_for('single') }}'">Single Classification</button>
+            <button class="button" onclick="window.location='{{ url_for('multi') }}'">Multiple Classification</button>
         </div>
     </div>
 
 
     <footer id="footer">
-        <p>EVALUASI HASIL OUTPUT PENGUJIAN PERFORMA MODEL DETEKSI OBJEK RESIDUAL NEURAL NETWORK (RESNET-50) DAN YOLO V8
-            DALAM KLASIFIKASI KERETAKAN JALAN MENGGUNAKAN METRIK MAP</p>
+        <p>EVALUATION OF THE OUTPUT OF PERFORMANCE TESTING OF OBJECT DETECTION MODELS RESIDUAL NEURAL NETWORK
+            (RESNET-50) AND YOLO V8
+            IN ROAD CRACK CLASSIFICATION USING MAP METRIC</p>
     </footer>
 </body>
 

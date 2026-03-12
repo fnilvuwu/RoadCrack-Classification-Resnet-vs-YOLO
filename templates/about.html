@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-    <title>RoadCrack Classification - Tentang</title>
+    <title>RoadCrack Classification - About</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.png')}}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -146,7 +146,7 @@
             font-size: 22px;
             margin-bottom: 20px;
         }
-        
+
         .social-links {
             display: flex;
             justify-content: center;
@@ -178,6 +178,7 @@
         .btn-linkedin {
             background-color: #0077B5;
         }
+
         .btn-linkedin:hover {
             background-color: #005E93;
         }
@@ -185,6 +186,7 @@
         .btn-instagram {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
+
         .btn-instagram:hover {
             background: linear-gradient(45deg, #d88229 0%, #ce5b33 25%, #c4203a 50%, #b51c59 75%, #a61376 100%);
         }
@@ -192,6 +194,7 @@
         .btn-youtube {
             background-color: #FF0000;
         }
+
         .btn-youtube:hover {
             background-color: #CC0000;
         }
@@ -199,6 +202,7 @@
         .btn-fiverr {
             background-color: #1dbf73;
         }
+
         .btn-fiverr:hover {
             background-color: #169b5c;
         }
@@ -226,31 +230,34 @@
         <label><img src="{{ url_for('static', filename='img/white.png')}}" alt="RoadCrack"><a
                 href="{{ url_for('home') }}"></a></label>
         <ul>
-            <li><a href="{{ url_for('home') }}">Beranda</a></li>
-            <li><a href="#">Klasifikasi</a>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="#">Classification</a>
                 <ul class="dropdown">
-                    <li><a href="{{ url_for('tunggal') }}">Klasifikasi Tunggal</a>
-                    <li><a href="{{ url_for('multi') }}">Multi Klasifikasi</a>
+                    <li><a href="{{ url_for('single') }}">Single Classification</a>
+                    <li><a href="{{ url_for('multi') }}">Multiple Classification</a>
                 </ul>
             </li>
-            <li><a href="{{ url_for('about') }}">Tentang</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
         </ul>
     </nav>
 
     <div class="container">
         <div class="title">
-            <h2>Tentang Website</h2>
+            <h2>About Website</h2>
         </div>
         <div class="box">
-            <p><strong>Tujuan Website:</strong><br>
-                Website ini bertujuan untuk mengevaluasi hasil pengujian performa model deteksi objek Residual Neural Network (ResNet-50) dan YOLOv8 dalam klasifikasi keretakan jalan menggunakan metrik mAP. Melalui website ini, pengguna dapat membandingkan akurasi dan kecepatan inferensi dari kedua model dalam mendeteksi dan mengklasifikasikan kondisi jalan (Good, Pothole, Crack).
+            <p><strong>Website Purpose:</strong><br>
+                This website aims to evaluate the output of performance testing of object detection models Residual
+                Neural Network (ResNet-50) and YOLOv8 in road crack classification using the mAP metric. Through this
+                website, users can compare the accuracy and inference speed of both models in detecting and classifying
+                road conditions (Good, Pothole, Crack).
             </p>
             <p class="creator-info">Made by Fnilvu & Fatahillah</p>
-            
+
             <div class="cta-section">
                 <h3>Want to make a project like this? Hire us!</h3>
                 <p style="font-size: 16px; margin-bottom: 5px;">Connect with us on social media or hire us directly:</p>
-                
+
                 <h4 style="color: #045F8B; margin-top: 20px; margin-bottom: 10px; font-size: 18px;">Fnilvu</h4>
                 <div class="social-links" style="margin-top: 5px; margin-bottom: 25px;">
                     <a href="https://www.linkedin.com/in/fnilvuwu/" target="_blank" class="social-btn btn-linkedin">
@@ -269,7 +276,8 @@
 
                 <h4 style="color: #045F8B; margin-top: 20px; margin-bottom: 10px; font-size: 18px;">Fatahillah</h4>
                 <div class="social-links" style="margin-top: 5px;">
-                    <a href="https://www.linkedin.com/in/muhammad-rizky-fatahillah-50903b267/" target="_blank" class="social-btn btn-linkedin">
+                    <a href="https://www.linkedin.com/in/muhammad-rizky-fatahillah-50903b267/" target="_blank"
+                        class="social-btn btn-linkedin">
                         <i class="fab fa-linkedin" style="margin-right: 8px;"></i> LinkedIn
                     </a>
                 </div>
@@ -278,8 +286,9 @@
     </div>
 
     <footer id="footer">
-        <p>EVALUASI HASIL OUTPUT PENGUJIAN PERFORMA MODEL DETEKSI OBJEK RESIDUAL NEURAL NETWORK (RESNET-50) DAN YOLO V8
-            DALAM KLASIFIKASI KERETAKAN JALAN MENGGUNAKAN METRIK MAP</p>
+        <p>EVALUATION OF THE OUTPUT OF PERFORMANCE TESTING OF OBJECT DETECTION MODELS RESIDUAL NEURAL NETWORK
+            (RESNET-50) AND YOLO V8
+            IN ROAD CRACK CLASSIFICATION USING MAP METRIC</p>
     </footer>
 </body>
 

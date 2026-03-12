@@ -1,14 +1,11 @@
-import cv2
 import os
-from ultralytics import YOLO
-import numpy as np
-from PIL import Image
-import tensorflow as tf
-import tensorflow_hub as hub
 import time
 
 
 def classify_image_yolo(image_path):
+    from ultralytics import YOLO
+    import cv2
+
     # Initialize the model
     model = YOLO("best.pt", task="classify")
     results = model.predict(source=image_path)
@@ -83,6 +80,12 @@ def classify_image_yolo(image_path):
 
 
 def classify_image_tf(image_path):
+    import tensorflow as tf
+    import tensorflow_hub as hub
+    from PIL import Image
+    import numpy as np
+    import cv2
+
     # Load the model
     model_path = "savedModel"  # Replace with the actual model path
     model = hub.KerasLayer(model_path)

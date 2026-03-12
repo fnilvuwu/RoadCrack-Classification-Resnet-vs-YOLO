@@ -1,27 +1,18 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
-import platform
-import psutil
-import cpuinfo
-import GPUtil
-from classification import classify_image_yolo, classify_image_tf
 import os
-import pandas as pd
 from werkzeug.utils import secure_filename
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-import matplotlib
-import seaborn as sns
-from openpyxl import Workbook
-from openpyxl.drawing.image import Image
+from classification import classify_image_yolo, classify_image_tf
 
 app = Flask(__name__)
-matplotlib.use(
-    "Agg"
-)  # Set the backend to 'Agg' fix UserWarning: Starting a Matplotlib GUI outside of the main thread will likely fail.
 
 
 # Function to get system information
 def get_system_info():
+    import platform
+    import cpuinfo
+    import psutil
+    import GPUtil
+
     system_info = {"Platform": platform.system()}
 
     cpu_info = cpuinfo.get_cpu_info()
@@ -119,6 +110,9 @@ def classify_tf():
 def export_to_excel(
     results_yolo, results_resnet, yolo_conf_matrix_path, tf_conf_matrix_path
 ):
+    import pandas as pd
+    from openpyxl.drawing.image import Image
+
     try:
         # Ensure that results_yolo["results"] and results_resnet["results"] contain lists of dictionaries
         yolo_results_list = list(results_yolo["results"].values())
@@ -205,10 +199,10 @@ def export_results():
     return jsonify({"message": "Classification results exported successfully"})
 
 
-# Route for 'tunggal' page
-@app.route("/tunggal")
-def tunggal():
-    return render_template("tunggal.html")
+# Route for 'single' page
+@app.route("/single")
+def single():
+    return render_template("single.html")
 
 
 def ensure_directory(directory):
@@ -217,6 +211,11 @@ def ensure_directory(directory):
 
 
 def plot_confusion_matrix(cm, labels, save_path, title):
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
     fig, ax = plt.subplots(figsize=(8, 6))
     sns.set(font_scale=1.2)
     sns.heatmap(
@@ -242,6 +241,8 @@ def plot_confusion_matrix(cm, labels, save_path, title):
 
 
 def compute_confusion_matrix_yolo(predictions_dict, labels):
+    from sklearn.metrics import confusion_matrix
+
     pred_labels = [
         result["predicted_class"] for result in predictions_dict["results"].values()
     ]
@@ -257,6 +258,8 @@ def compute_confusion_matrix_yolo(predictions_dict, labels):
 
 
 def compute_confusion_matrix_tf(predictions_dict, labels):
+    from sklearn.metrics import confusion_matrix
+
     pred_labels = [
         result["predicted_class"] for result in predictions_dict["results"].values()
     ]
